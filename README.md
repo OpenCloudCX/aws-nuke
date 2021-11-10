@@ -9,7 +9,7 @@ Add the desired AWS account number for nuke into the portion of the configuratio
 ```bash
 accounts:
   <aws account number>:
-    filters:****
+    filters:
 ```
 
 Change the Route53 DNS Suffix for the Route53ResourceRecordSet entry
