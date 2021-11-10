@@ -8,7 +8,7 @@ Add the desired AWS account number for nuke into the portion of the configuratio
 
 ```bash
 accounts:
-  <aws account number?:
+  <aws account number>:
     filters:****
 ```
 
