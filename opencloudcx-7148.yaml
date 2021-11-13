@@ -49,7 +49,7 @@ resource-types:
 accounts:
   592618077148:
     filters:
-ajn@time-killers:~/repo/opencloudcx/old-vault/nuke$
+      SecretsManagerSecret:
       - property: "tag:nuke-protect"
         value: "true"
         #Route53HostedZone:

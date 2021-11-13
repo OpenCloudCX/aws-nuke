@@ -1,0 +1,114 @@
+regions:
+- "global" # This is for all global resource types e.g. IAM
+- "us-east-1"
+
+account-blocklist:
+- 1234567890
+
+# optional: restrict nuking to these resources
+resource-types:
+  targets:
+  - S3Bucket
+  - S3Object
+  - EC2Instance
+  - CloudFormationStack
+  - MSKCluster
+  - EC2VPC
+  - EC2VPCEndpoint
+  - EC2VPCEndpointServiceConfiguration
+  - EC2VPCPeeringConnection
+  - EC2Subnet
+  - EKSCluster
+  - ECSCluster
+  - EC2InternetGateway
+  - EC2NATGateway
+  - EC2NetworkACL
+  - EC2RouteTable
+  - EC2SecurityGroup
+  - EC2KeyPair
+  - EC2Address
+  - ELB
+  - RDSDBCluster
+  - RDSInstance
+  - RDSDBClusterParameterGroup
+  - RDSDBParameterGroup
+  - RDSDBSubnetGroup
+  - Route53HostedZone
+  - Route53ResourceRecordSet
+  - EKSNodegroups
+  - EC2NetworkInterface
+  - EC2Volume
+  - IAMRole
+  - IAMRolePolicyAttachment
+  - IAMRolePolicy
+  - WorkSpacesWorkspace
+  - DirectoryServiceDirectory
+  - SecretsManagerSecret
+
+accounts:
+  725653950044:
+    filters:
+      SecretsManagerSecret:
+      - property: "tag:nuke-protect"
+        value: "true"
+      Route53HostedZone:
+      - property: "tag:nuke-protect"
+        value: "true"
+      Route53ResourceRecordSet:
+      - "_8b8e2a130f8847cd468a7580274c7778.sandbox.demoriva.com"
+      - property: Type
+        type: contains
+        value: "CNAME"
+        invert: true
+      - property: Type
+        type: contains
+        value: "A"
+        invert: true
+      EC2InternetGateway:
+      - "igw-8dc2d5f6"
+      EC2RouteTable:
+      - property: Main
+        value: "true"
+      - "rtb-becce3c0"
+      EC2SecurityGroup:
+      - property: Name
+        type: contains
+        value: "default"
+      EC2Subnet:
+      - property: DefaultForAz
+        value: "true"
+      EC2VPC:
+      - property: IsDefault
+        value: "true"
+        filters:
+      S3Bucket:
+      - property: "tag:nuke-protect"
+        value: "true"
+      EC2Volume:
+      - property: tag:Name
+        type: contains
+        value: "kubernetes.io/cluster/example-dev-module"
+      IAMRole:
+      - property: PolicyArn
+        type: contains
+        value: "/aws-service-role/"     
+      - property: Path
+        type: contains
+        value: "/aws-service-role/"     
+      - property: Name
+        type: contains
+        value: "riva-dev-module"
+        invert: true
+      IAMRolePolicyAttachment:
+      - property: PolicyArn
+        type: contains
+        value: "/aws-service-role/"     
+      - property: RoleName
+        type: contains
+        value: "riva-dev-module-test"
+        invert: true
+      - property: RoleName
+        type: contains
+        value: "ocxbootstrap-codebuild-role"
+        invert: true
+
